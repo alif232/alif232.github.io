@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Detail</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+
+<body class="bg-slate-900 text-gray-200">
+
+<section class="bg-gradient-to-br from-slate-900 to-slate-800 py-20">
+  <div class="max-w-5xl mx-auto px-6">
+    <a href="index.html#experience" class="text-sky-400 text-sm hover:underline">
+      ← Back to Home
+    </a>
+
+    <h1 id="title" class="text-4xl font-bold mt-4 text-sky-400"></h1>
+    <p id="period" class="text-gray-400 text-sm"></p>
+  </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
+
+  <div class="md:col-span-2">
+    <h2 class="text-2xl font-semibold border-l-4 border-sky-400 pl-3 mb-4">
+      Description
+    </h2>
+
+    <p id="description" class="text-gray-300 leading-relaxed"></p>
+
+    <ul id="tasks" class="list-disc list-inside mt-5 space-y-2 text-gray-300"></ul>
+  </div>
+
+  <div>
+    <h2 class="text-2xl font-semibold border-l-4 border-sky-400 pl-3 mb-4">
+      Tech Stack
+    </h2>
+
+    <div id="techStack" class="flex flex-wrap gap-2"></div>
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 pb-20">
+  <h2 class="text-2xl font-semibold border-l-4 border-sky-400 pl-3 mb-8">
+    Project Documentation
+  </h2>
+
+  <div id="gallery" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</section>
+
+<footer class="text-center py-10 border-t border-slate-800 text-gray-500 text-sm">
+  © <span id="year"></span> Alif Fahzlian — Portfolio
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const projectData = {
+  nutricheck: {
+    title: "NutriCheck",
+    period: "Juni 2025 – Agustus 2025",
+    description: `
+      Aplikasi mobile untuk informasi gizi makanan berdasarkan deteksi gambar makanan dan kode pada kemasan barang.
+    `,
+    tasks: [
+      "Mendeteksi nama makanan menggunakan kamera",
+      "Mendeteksi informasi gizi makanan berdasarkan nama makanan",
+      "Menyimpan informasi gizi makanan",
+      "Menampilkan report bulanan informasi gizi makanan berdasarkan kalori, karbohidrat, lemak, dan protein"
+    ],
+    tech: ["Flutter", "Node.JS", "MongoDB", "Python"],
+    images: [
+      "image/NutriCheck/nutricheck1.jpg",
+      "image/NutriCheck/nutricheck2.jpg",
+    ]
+  },
+
+  kedai: {
+    title: "Kedai Mama Yasmin",
+    period: "Desember 2024",
+    description: `
+      Aplikasi mobile untuk sistem informasi toko, yang dapat digunakan untuk melakukan transaksi dan menghasilkan laporan.
+    `,
+    tasks: [
+      "Membuat aplikasi sistem informasi kedai mama yasmin, dari informasi penjualan dan keuangan.",
+      "Membuat sistem untuk menambah menu dan stok untuk makanan dan minumananya.",
+      "Membuat sistem untuk pemesanan oleh kasir dari memilih menu, menghitung total harga, menghitung kembalian, dan menampilkan uang pecahan yang harus dikembalikan."
+    ],
+    tech: ["Flutter", "Laravel (API)", "Python", "MySQL"],
+    images: [
+      "image/Kedai/kedai1.png",
+      "image/Kedai/kedai2.jpg",
+    ]
+  },
+
+  job: {
+    title: "JobMatchID",
+    period: "Nov - Des 2024",
+    description: `
+      Aplikasi website untuk mencari lowongan pekerjaan dan menyediakan informasi mengenai lowongan pekerjaan, pengajuan lamaran kerja , dan 
+        Informasi Penerimaan.
+    `,
+    tasks: [
+      "Membuat aplikasi pencarian lowongan pekerjaan dengan fitur rekomendasi berdasarkan skills.",
+      "Membuat sistem lamar untuk pelamar dengan memilih lowongan pekerjaan lalu mengupload cv.",
+      "Membuat sistem untuk perusahaan, tambah lowongan pekerjaan dan sistem terima atau tolak lamaran. "
+    ],
+    tech: ["Laravel", "MySQL"],
+    images: [
+      "image/Job/JobMatchID1.png",
+      "image/Job/JobMatchID2.png",
+    ]
+  },
+
+  present: {
+    title: "E-Present",
+    period: "November 2024",
+    description: `
+      Aplikasi website untuk informasi materi, dan tugas presentasi. Aplikasi ini berisi materi dan tugas presentasi yang direkam langsung
+        melalui kamera.
+    `,
+    tasks: [
+      "Membuat aplikasi sistem e-learning untuk presentasi bahasa inggris.",
+      "Membuat sistem untuk murid mengerjakan tugasnya dengan fitur rekam.",
+      "Membuat sistem untuk guru melihat hasil tugas muridnya, memberikan nilai tugasnya dan memberikan komentar."
+    ],
+    tech: ["CodeIgniter", "MySQL"],
+    images: [
+      "image/Present/e-present1.png",
+      "image/Present/e-present2.png",
+    ]
+  }
+};
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const data = projectData[id];
+
+if (!data) {
+  document.body.innerHTML = `
+    <div class="h-screen flex items-center justify-center text-center">
+      <div>
+        <h1 class="text-3xl font-bold text-red-400">Project Not Found</h1>
+        <a href="index.html" class="text-sky-400 underline mt-4 block">Back</a>
+      </div>
+    </div>
+  `;
+} else {
+
+  document.getElementById("title").textContent = data.title;
+  document.getElementById("period").textContent = data.period;
+  document.getElementById("description").textContent = data.description;
+
+  const taskEl = document.getElementById("tasks");
+  data.tasks.forEach(t => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    taskEl.appendChild(li);
+  });
+
+  const techEl = document.getElementById("techStack");
+  data.tech.forEach(t => {
+    const span = document.createElement("span");
+    span.className = "px-3 py-1 border border-sky-400 rounded-md text-sm";
+    span.textContent = t;
+    techEl.appendChild(span);
+  });
+
+  const galleryEl = document.getElementById("gallery");
+  data.images.forEach(img => {
+    galleryEl.innerHTML += `
+      <div class="overflow-hidden rounded-xl border border-slate-700 hover:border-sky-400 transition aspect-[4/3] bg-slate-900 flex items-center justify-center">
+        <img src="${img}"
+            class="w-full h-full object-contain hover:scale-105 transition duration-300">
+      </div>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>
